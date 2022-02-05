@@ -1,35 +1,43 @@
-import React from 'react';
-import Urls from './Urls';
-import Layout from './components/Layout';
-import {connect} from 'react-redux';
-import * as actions from './store/AuthActions'
+import React from 'react'
+import {connect} from 'react-redux'
+import {Route, Routes, Navigate} from 'react-router-dom'
 
-function App(props) {
-  React.useEffect(() => {
-    props.setAuthenticatedIfRequired();
-  }, []);
+import Layout from './hoc/Layout'
+import Auth from './containers/auth/Auth'
+import Logout from './components/logout/Logout'
+import Home from './components/Home'
+import {autoLogin} from './store/actions/Auth'
 
-  return (
-    <div className="App">
-      <Layout {...props}>
-         <Urls {...props}/>
+class App extends React.Component {
+  componentDidMount() {
+    this.props.autoLogin()
+  }
+
+  render() {
+    let routes = (
+      <Routes>
+        <Route exact path='/auth' element={<Auth />} />
+        <Navigate exact to='/' element={<Home />} />
+      </Routes>
+    )
+
+    if(this.props.isAuthenticated) {
+      routes = (
+        <Routes>
+          <Route exact path='/logout' element={<Logout />} />
+          <Navigate exact to='/' />
+        </Routes>
+      )
+    }
+
+    return (
+      <Layout>
+        {routes}
       </Layout>
-    </div>
-  );
-}
-
-const mapStateToProps = (state) => {
-  return {
-    isAuthenticated: state.auth.token !== null && typeof state.auth.token !== 'undefined',
-    token: state.auth.token
+    )
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setAuthenticatedIfRequired: () => dispatch(actions.authCheckState()),
-    logout: () => dispatch(actions.authLogout()) 
-  }
-}
+const mapStateToProps = state => ({isAuthenticated: !!state.auth.token})
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, {autoLogin})(App)

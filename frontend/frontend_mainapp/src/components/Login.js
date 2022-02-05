@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Children } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../store/AuthActions';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
+import Button from './UI/button/Button';
 
 function Login(props) {
   const [username, setuserName] = React.useState(null);
@@ -23,10 +24,7 @@ function Login(props) {
 
   return (
     <Container component="main" maxWidth="xs">
-        <form noValidate onSubmit={handleSubmit}>
-          <TextField onChange={handleFormFieldChange} />
-          <TextField onChange={handleFormFieldChange} />
-        </form>
+        <Button>LOGIN</Button>
     </Container>
   );
 }
