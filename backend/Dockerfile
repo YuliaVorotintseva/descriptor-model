@@ -3,7 +3,7 @@
 ###########
 
 # pull official base image
-FROM python:3.10.2-slim-stretch as builder
+FROM python:3.10.2 as builder
 
 # set work directory 
 WORKDIR /usr/src/app
@@ -22,7 +22,7 @@ RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requir
 #########
 
 # pull official base image
-FROM python:3.10.2-slim-stretch
+FROM python:3.10.2
 
 # installing netcat (nc) since we are using that to listen to postgres server in entrypoint.sh
 RUN apt-get update && apt-get install -y --no-install-recommends netcat && \
@@ -42,7 +42,7 @@ WORKDIR /usr/src/app
 COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
 
 # copy our django project
-COPY ./django_app .
+COPY ./mainapp .
 
 # run entrypoint.sh
 RUN chmod +x /usr/src/app/entrypoint.sh

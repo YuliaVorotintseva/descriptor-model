@@ -3,13 +3,13 @@
 ###########
 
 # pull official base image
-FROM node:14.17.5-alpine3.9 as builder
+FROM node:12.18.3-alpine3.9 as builder
 
 # set work directory
 WORKDIR /usr/src/app
 
 # install dependencies and avoid `node-gyp rebuild` errors
-COPY ./react_app/package.json .
+COPY ./frontend_mainapp/package.json .
 RUN apk add --no-cache --virtual .gyp \
         python \
         make \
@@ -18,7 +18,7 @@ RUN apk add --no-cache --virtual .gyp \
     && apk del .gyp
 
 # copy our react project
-COPY ./react_app .
+COPY ./frontend_mainapp .
 
 # perform npm build
 ARG API_SERVER
@@ -31,7 +31,7 @@ RUN REACT_APP_API_SERVER=${API_SERVER} \
 #########
 
 # pull official base image
-FROM node:14.17.5-alpine3.9 
+FROM node:12.18.3-alpine3.9
 
 # set work directory
 WORKDIR /usr/src/app
