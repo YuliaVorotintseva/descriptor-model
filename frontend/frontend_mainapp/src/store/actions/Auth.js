@@ -3,6 +3,7 @@ import {
     AUTH_SUCCESS,
     AUTH_LOGOUT
 } from './ActionTypes'
+import * as settings from '../../settings'
 
 export function auth(email, password, isLogin) {
     return async dispatch => {
@@ -12,10 +13,10 @@ export function auth(email, password, isLogin) {
             returnSecureToken: true
         }
 
-        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCwVbw77ktAkHYyAZDQxuH0vKLMr9ueh60'
+        let url = url = `$(settings.API_SERVER)/api/auth/login`
 
         if(isLogin) {
-            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCwVbw77ktAkHYyAZDQxuH0vKLMr9ueh60'
+            url = `$(settings.API_SERVER)/api/auth/logout`
         }
 
         const response = await axios.post(url, authData)
