@@ -3,8 +3,6 @@ import {connect} from 'react-redux'
 import is from 'is_js'
 
 import styleClasses from './Auth.module.css'
-import Button from '../../components/UI/button/Button'
-import Input from '../../components/UI/input/Input'
 import {auth} from '../../store/actions/Auth'
 
 class Auth extends React.Component {
@@ -87,47 +85,28 @@ class Auth extends React.Component {
         })
     }
 
-    renderInputs() {
-        return Object.keys(this.state.formControls).map((controlName, index) => {
-            const control = this.state.formControls[controlName]
-            return (
-                <Input
-                    key={controlName + index}
-                    type={control.type}
-                    value={control.value}
-                    valid={control.valid}
-                    touched={control.touched}
-                    label={control.label}
-                    errorMessage={control.errorMessage}
-                    shouldValidate={!!control.validation}
-                    onChange={event => this.onChangeHandler(event, controlName)}
-                />
-            )
-        })
-    }
-
     render() {
         return (
             <div className={styleClasses.Auth}>
                 <div>
                     <h1>Авторизация</h1>
-                    <form onSubmit={this.submitHandler} className={styleClasses.AuthForm}>
-                        {this.renderInputs()}
+                    <form class="box" onSubmit={this.submitHandler}>
+                        <div class="field">
+                            <label class="label">Email</label>
+                            <div class="control">
+                            <input class="input" type="email" placeholder="e.g. alex@example.com" />
+                            </div>
+                        </div>
 
-                        <Button
-                            type="success"
-                            onClick={this.loginHandler}
-                            disabled={!this.state.isFormValid}
-                        >
-                            Войти
-                        </Button>
-                        <Button
-                            type="primary"
-                            onClick={this.registerHandler}
-                            disabled={!this.state.isFormValid}
-                        >
-                            Зарегистрироваться
-                        </Button>
+                        <div class="field">
+                            <label class="label">Password</label>
+                            <div class="control">
+                            <input class="input" type="password" placeholder="********" />
+                            </div>
+                        </div>
+
+                        <button class="button is-primary" onClick={this.loginHandler} disabled={!this.state.isFormValid}>Sign up</button>
+                        <button class="button is-primary" onClick={this.registerHandler} disabled={!this.state.isFormValid}>Sign in</button>
                     </form>
                 </div>
             </div>

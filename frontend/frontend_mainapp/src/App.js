@@ -16,7 +16,7 @@ class App extends React.Component {
   render() {
     let routes = (
       <Routes>
-        <Route path='/auth' element={<Auth />} />
+        <Route path='/auth/logup' element={<Auth />} />
         <Route path='/' element={<Home />} />
       </Routes>
     )

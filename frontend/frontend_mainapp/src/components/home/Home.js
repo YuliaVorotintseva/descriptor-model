@@ -1,11 +1,11 @@
 import React from 'react'
-import TopBar from '../top_bar/TopBar'
 
 function Home() {
     return (
-        <React.Fragment>
-            <h1>Home</h1>
-        </React.Fragment>
+        <>
+            <h1 class="title">Title</h1>
+            <h2 class="subtitle">Subtitle</h2>
+        </>
     )
 }
 

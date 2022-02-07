@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import 'bulma'
 import reportWebVitals from './reportWebVitals';
 
 import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
