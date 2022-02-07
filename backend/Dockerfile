@@ -24,7 +24,7 @@ RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requir
 # pull official base image
 FROM python:3.10.2
 
-# installing netcat (nc) since we are using that to listen to postgres server in entrypoint.sh
+# installing netcat (nc) to listen to postgres server in entrypoint.sh
 RUN apt-get update && apt-get install -y --no-install-recommends netcat && \
     apt-get autoremove -y && \
     apt-get clean && \
@@ -41,7 +41,7 @@ WORKDIR /usr/src/app
 # copy entrypoint.sh
 COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
 
-# copy our django project
+# copy django project
 COPY ./mainapp .
 
 # run entrypoint.sh

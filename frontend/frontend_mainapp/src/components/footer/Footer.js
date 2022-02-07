@@ -2,7 +2,9 @@ import React from 'react';
 
 function Footer() {
     return (
-      <div></div>
+      <footer className='footer'>
+        <p><b>Created by </b>Yulia Vorotintseva</p>
+      </footer>
     );
   }
 
