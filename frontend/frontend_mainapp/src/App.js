@@ -1,12 +1,12 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {Route, Routes, Navigate, withRoute, BrowserRouter} from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Route, Routes, Navigate, withRoute, BrowserRouter } from 'react-router-dom'
 
 import Layout from './hoc/Layout'
 import Auth from './containers/auth/Auth'
 import Logout from './components/logout/Logout'
 import Home from './components/home/Home'
-import {autoLogin} from './store/actions/Auth'
+import { autoLogin } from './store/actions/Auth'
 
 class App extends React.Component {
   componentDidMount() {
@@ -16,12 +16,12 @@ class App extends React.Component {
   render() {
     let routes = (
       <Routes>
-        <Route path='/auth/logup' element={<Auth />} />
+        <Route path='/auth' element={<Auth />} />
         <Route path='/' element={<Home />} />
       </Routes>
     )
 
-    if(this.props.isAuthenticated) {
+    if (this.props.isAuthenticated) {
       routes = (
         <Routes>
           <Route path='/logout' element={<Logout />} />
@@ -40,5 +40,5 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({isAuthenticated: !!state.auth.token})
-export default connect(mapStateToProps, {autoLogin})(App)
+const mapStateToProps = state => ({ isAuthenticated: !!state.auth.token })
+export default connect(mapStateToProps, { autoLogin })(App)
