@@ -1,54 +1,20 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import is from 'is_js'
-
 import styleClasses from './Auth.module.css'
+import is from 'is_js'
+import { connect } from 'react-redux'
 import { auth } from '../../store/actions/Auth'
 
 class Auth extends React.Component {
   state = {
     isFormValid: false,
-    formControls: {
-      email: {
-        value: '',
-        type: 'email',
-        label: 'email',
-        errorMessage: 'Enter correct email',
-        valid: false,
-        touched: false,
-        validation: {
-          required: true,
-          email: true
-        }
-      },
-      password: {
-        value: '',
-        type: 'password',
-        label: 'Password',
-        errorMessage: 'Enter correct password',
-        valid: false,
-        touched: false,
-        validation: {
-          required: true,
-          minLength: 6
-        }
-      }
-    }
+    formControls: {...this.props.formControls}
   }
 
-  loginHandler = () => {
+  authHandler = () => {
     this.props.auth(
       this.state.formControls.email.value,
       this.state.formControls.password.value,
-      true
-    )
-  }
-
-  registerHandler = () => {
-    this.props.auth(
-      this.state.formControls.email.value,
-      this.state.formControls.password.value,
-      false
+      this.props.isAuthorized
     )
   }
 
@@ -66,6 +32,7 @@ class Auth extends React.Component {
   }
 
   onChangeHandler = (event, controlName) => {
+    console.log(event.target.value)
     const formControls = { ...this.state.formControls }
     const control = { ...formControls[controlName] }
 
@@ -85,28 +52,46 @@ class Auth extends React.Component {
     })
   }
 
+  renderInputs() {
+    return Object.keys(this.state.formControls).map((controlName, index) => {
+      const control = this.state.formControls[controlName]
+      return (
+        <div class="field">
+          <label class="label">{controlName}</label>
+          <div class="control">
+            <input
+              class="input"
+              key={controlName + index}
+              type={control.type}
+              value={control.value}
+              valid={control.valid}
+              touched={control.touched}
+              label={control.label}
+              errorMessage={control.errorMessage}
+              shouldValidate={!!control.validation}
+              onChange={event => this.onChangeHandler(event, controlName)}
+            />
+          </div>
+        </div>
+      )
+    })
+  }
+
   render() {
     return (
       <div className={styleClasses.Auth}>
         <div>
           <h1>Авторизация</h1>
           <form class="box" onSubmit={this.submitHandler}>
-            <div class="field">
-              <label class="label">Email</label>
-              <div class="control">
-                <input class="input" type="email" placeholder="e.g. alex@example.com" />
-              </div>
-            </div>
+            {this.renderInputs()}
 
-            <div class="field">
-              <label class="label">Password</label>
-              <div class="control">
-                <input class="input" type="password" placeholder="********" />
-              </div>
-            </div>
-
-            <button class="button is-primary" onClick={this.loginHandler} disabled={!this.state.isFormValid}>Sign up</button>
-            <button class="button is-primary" onClick={this.registerHandler} disabled={!this.state.isFormValid}>Sign in</button>
+            <button
+              class="button is-primary"
+              onClick={this.authHandler}
+              disabled={!this.state.isFormValid}
+            >
+              {this.props.authStatus}
+            </button>
           </form>
         </div>
       </div>

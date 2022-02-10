@@ -2,6 +2,17 @@ import React from 'react'
 import './TopBar.module.css'
 
 const TopBar = props => {
+  const renderButtons = () => {
+    return Object.keys(props.buttons).map((buttonName, index) => {
+      const button = props.buttons[buttonName]
+      return (
+        <a href={button.ref} class="button is-link">
+          {button.authStatus}
+        </a>
+      )
+    })
+  }
+
   return (
     <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
@@ -32,7 +43,7 @@ const TopBar = props => {
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              <a href='/auth' class="button is-primary">Log in</a>
+              {renderButtons()}
             </div>
           </div>
         </div>

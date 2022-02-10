@@ -1,12 +1,11 @@
 import React from 'react'
 
-function Home() {
+const Home = () => {
   return (
-    <>
-      <h1 class="title">Title</h1>
-      <h2 class="subtitle">Subtitle</h2>
-    </>
-  )
+    <main className="container">
+      <h1 className="text-white text-uppercase text-center my-4">Get descriptor model</h1>
+    </main>
+  );
 }
 
 export default Home
