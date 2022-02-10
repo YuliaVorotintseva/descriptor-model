@@ -6,10 +6,12 @@ import Logout from './components/logout/Logout'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { autoLogin } from './store/actions/Auth'
+import LoadFile from './components/load_file/LoadFile'
 
 const loginProps = {
   authStatus: 'LOG IN',
   isAuthorized: true,
+  authText: 'Авторизация',
   formControls: {
     email: {
       value: '',
@@ -41,6 +43,7 @@ const loginProps = {
 const registerProps = {
   authStatus: 'SIGN UP',
   isAuthorized: false,
+  authText: 'Регистрация',
   formControls: {
     firstname: {
       value: '',
@@ -88,6 +91,7 @@ class App extends React.Component {
       routes = (
         <Routes>
           <Route path='/logout' element={<Logout />} />
+          <Route path='/load' element={<LoadFile />} />
           <Route path='/' element={<Home />} />
         </Routes>
       )

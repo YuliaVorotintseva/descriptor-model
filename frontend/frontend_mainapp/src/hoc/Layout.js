@@ -41,7 +41,7 @@ const Layout = props => {
   return (
     <div className={styleClasses.Layout}>
       <main>
-        <TopBar {...unauthorizedProps} />
+        {navbar}
         {props.children}
         <Footer />
       </main>

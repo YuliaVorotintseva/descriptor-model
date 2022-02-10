@@ -16,8 +16,8 @@ const TopBar = props => {
   return (
     <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <a class="navbar-item" href="https://bulma.io">
-          <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
+        <a class="navbar-item" href="/">
+          <img src="home.png" />
         </a>
 
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -31,6 +31,12 @@ const TopBar = props => {
         <div class="navbar-start">
           <a href='/' class="navbar-item">Home</a>
           <a href='/documentation' class="navbar-item">Documentation</a>
+
+          {
+            props.isAuthenticated
+            ? <a href='/load' class="navbar-item">Load docs</a>
+            : null
+          }
 
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">More</a>

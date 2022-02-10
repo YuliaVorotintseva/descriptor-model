@@ -80,8 +80,8 @@ class Auth extends React.Component {
   render() {
     return (
       <div className={styleClasses.Auth}>
-        <div>
-          <h1>Авторизация</h1>
+        <div class='content'>
+          <h1>{this.props.authText}</h1>
           <form class="box" onSubmit={this.submitHandler}>
             {this.renderInputs()}
 
