@@ -42,6 +42,7 @@ const TopBar = props => {
             <a class="navbar-link">More</a>
             <div class="navbar-dropdown">
               <a href='/about' class="navbar-item">About</a>
+              <a href='/contacts' class="navbar-item">Contacts</a>
             </div>
           </div>
         </div>

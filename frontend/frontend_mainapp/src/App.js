@@ -7,6 +7,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { autoLogin } from './store/actions/Auth'
 import LoadFile from './components/load_file/LoadFile'
+import Documentation from './components/documentation/Documentation'
+import Contacts from './components/contacts/Contacts'
+import About from './components/about/About'
+import CreateModel from './components/create/CreateModel'
 
 const loginProps = {
   authStatus: 'LOG IN',
@@ -81,6 +85,9 @@ class App extends React.Component {
   render() {
     let routes = (
       <Routes>
+        <Route path='/about' element={<About />} />
+        <Route path='/contacts' element={<Contacts />} />
+        <Route path='/documentation' element={<Documentation />} />
         <Route path='/login' element={<Auth {...loginProps} />} />
         <Route path='/register' element={<Auth {...registerProps} />} />
         <Route path='/' element={<Home />} />
@@ -90,6 +97,10 @@ class App extends React.Component {
     if (this.props.isAuthenticated) {
       routes = (
         <Routes>
+          <Route path='/about' element={<About />} />
+          <Route path='/create' element={<CreateModel />} />
+          <Route path='/contacts' element={<Contacts />} />
+          <Route path='/documentation' element={<Documentation />} />
           <Route path='/logout' element={<Logout />} />
           <Route path='/load' element={<LoadFile />} />
           <Route path='/' element={<Home />} />
