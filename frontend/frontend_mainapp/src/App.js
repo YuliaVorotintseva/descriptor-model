@@ -3,7 +3,7 @@ import Layout from './hoc/Layout'
 import Home from './components/home/Home'
 import Auth from './containers/auth/Auth'
 import Logout from './components/logout/Logout'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { autoLogin } from './store/actions/Auth'
 import LoadFile from './components/load_file/LoadFile'
@@ -12,72 +12,74 @@ import Contacts from './components/contacts/Contacts'
 import About from './components/about/About'
 import CreateModel from './components/create/CreateModel'
 
-const loginProps = {
-  authStatus: 'LOG IN',
-  isAuthorized: true,
-  authText: 'Авторизация',
-  formControls: {
-    email: {
-      value: '',
-      type: 'email',
-      label: 'email',
-      errorMessage: 'Enter correct email',
-      valid: false,
-      touched: false,
-      validation: {
-        required: true,
-        email: true
-      }
-    },
-    password: {
-      value: '',
-      type: 'password',
-      label: 'Password',
-      errorMessage: 'Enter correct password',
-      valid: false,
-      touched: false,
-      validation: {
-        required: true,
-        minLength: 6
+class App extends React.Component {
+  loginProps = {
+    ...this.props,
+    authStatus: 'LOG IN',
+    isAuthorized: true,
+    authText: 'Авторизация',
+    formControls: {
+      email: {
+        value: '',
+        type: 'email',
+        label: 'email',
+        errorMessage: 'Enter correct email',
+        valid: false,
+        touched: false,
+        validation: {
+          required: true,
+          email: true
+        }
+      },
+      password: {
+        value: '',
+        type: 'password',
+        label: 'Password',
+        errorMessage: 'Enter correct password',
+        valid: false,
+        touched: false,
+        validation: {
+          required: true,
+          minLength: 6
+        }
       }
     }
   }
-}
-
-const registerProps = {
-  authStatus: 'SIGN UP',
-  isAuthorized: false,
-  authText: 'Регистрация',
-  formControls: {
-    firstname: {
-      value: '',
-      type: 'text',
-      label: 'text',
-      errorMessage: 'Enter your firstname',
-      valid: false,
-      touched: false,
-      validation: {
-        required: true,
-        email: true
-      }
-    },
-    lastname: {
-      value: '',
-      type: 'text',
-      label: 'text',
-      errorMessage: 'Enter your firstname',
-      valid: false,
-      touched: false,
-      validation: {
-        required: true,
-        email: true
-      }
-    },
-    ...loginProps.formControls
+  
+  registerProps = {
+    ...this.props,
+    authStatus: 'SIGN UP',
+    isAuthorized: false,
+    authText: 'Регистрация',
+    formControls: {
+      firstname: {
+        value: '',
+        type: 'text',
+        label: 'text',
+        errorMessage: 'Enter your firstname',
+        valid: false,
+        touched: false,
+        validation: {
+          required: true,
+          email: true
+        }
+      },
+      lastname: {
+        value: '',
+        type: 'text',
+        label: 'text',
+        errorMessage: 'Enter your firstname',
+        valid: false,
+        touched: false,
+        validation: {
+          required: true,
+          email: true
+        }
+      },
+      ...this.loginProps.formControls
+    }
   }
-}
-
-class App extends React.Component {
+  
   componentDidMount() {
     this.props.autoLogin()
   }
@@ -85,25 +87,33 @@ class App extends React.Component {
   render() {
     let routes = (
       <Routes>
-        <Route path='/about' element={<About />} />
-        <Route path='/contacts' element={<Contacts />} />
-        <Route path='/documentation' element={<Documentation />} />
-        <Route path='/login' element={<Auth {...loginProps} />} />
-        <Route path='/register' element={<Auth {...registerProps} />} />
-        <Route path='/' element={<Home />} />
+        <Route path='/about' element={<About {...this.props} />} />
+        <Route path='/contacts' element={<Contacts {...this.props} />} />
+        <Route path='/documentation' element={<Documentation {...this.props} />} />
+        <Route path='/login' element={<Auth {...this.loginProps} />} />
+        <Route path='/register' element={<Auth {...this.registerProps} />} />
+        <Route path='/' element={<Home {...this.props} />} />
+        <Route
+          path='*'
+          element={<Navigate to='/' />}
+        />
       </Routes>
     )
 
     if (this.props.isAuthenticated) {
       routes = (
         <Routes>
-          <Route path='/about' element={<About />} />
-          <Route path='/create' element={<CreateModel />} />
-          <Route path='/contacts' element={<Contacts />} />
-          <Route path='/documentation' element={<Documentation />} />
-          <Route path='/logout' element={<Logout />} />
-          <Route path='/load' element={<LoadFile />} />
-          <Route path='/' element={<Home />} />
+          <Route path='/about' element={<About {...this.props} />} />
+          <Route path='/create' element={<CreateModel {...this.props} />} />
+          <Route path='/contacts' element={<Contacts {...this.props} />} />
+          <Route path='/documentation' element={<Documentation {...this.props} />} />
+          <Route path='/logout' element={<Logout {...this.props} />} />
+          <Route path='/load' element={<LoadFile {...this.props} />} />
+          <Route path='/' element={<Home {...this.props} />} />
+          <Route
+            path='*'
+            element={<Navigate to='/' />}
+          />
         </Routes>
       )
     }

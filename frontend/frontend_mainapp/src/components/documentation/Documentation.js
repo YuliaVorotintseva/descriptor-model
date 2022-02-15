@@ -1,4 +1,4 @@
-const Documentation = () => {
+const Documentation = props => {
   return (
     <main className="container">
       <div class='content'>

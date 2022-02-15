@@ -5,29 +5,31 @@ import TopBar from '../components/top_bar/TopBar'
 
 import styleClasses from './Layout.module.css'
 
-const unauthorizedProps = {
-  buttons: {
-    signup: {
-      ref: '/register',
-      authStatus: 'SIGN UP'
-    },
-    login: {
-      ref: '/login',
-      authStatus: 'LOG IN'
-    },
-  }
-}
-
-const authorizedProps = {
-  buttons: {
-    logout: {
-      ref: '/logout',
-      authStatus: 'LOG OUT'
+const Layout = props => {
+  const unauthorizedProps = {
+    ...props,
+    buttons: {
+      signup: {
+        ref: '/register',
+        authStatus: 'SIGN UP'
+      },
+      login: {
+        ref: '/login',
+        authStatus: 'LOG IN'
+      },
     }
   }
-}
+  
+  const authorizedProps = {
+    ...props,
+    buttons: {
+      logout: {
+        ref: '/logout',
+        authStatus: 'LOG OUT'
+      }
+    }
+  }
 
-const Layout = props => {
   let navbar = (
     <TopBar {...unauthorizedProps} />
   )

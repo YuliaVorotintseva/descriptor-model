@@ -1,8 +1,8 @@
-const About = () => {
+const About = props => {
   return (
     <main className="container">
       <div class='content'>
-        <h1 className="text-white text-uppercase text-center my-4">Documentation</h1>
+        <h1 className="text-white text-uppercase text-center my-4">ABOUT</h1>
       </div>
     </main>
   )

@@ -1,7 +1,6 @@
 import React from 'react'
-import LoadFile from '../load_file/LoadFile';
 
-const Home = () => {
+const Home = props => {
   return (
     <main className="container">
       <div class='content'>

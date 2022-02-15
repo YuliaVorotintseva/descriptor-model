@@ -1,4 +1,4 @@
-const Contacts = () => {
+const Contacts = props => {
   return (
     <main className="container">
       <div class='content'>

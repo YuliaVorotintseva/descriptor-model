@@ -1,6 +1,6 @@
 import styleClasses from './LoadFile.module.css'
 
-const LoadFile = () => {
+const LoadFile = props => {
   return (
     <div className={styleClasses.Load}>
       <div class='content'>

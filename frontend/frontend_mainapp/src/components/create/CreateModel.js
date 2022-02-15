@@ -1,4 +1,4 @@
-const CreateModel = () => {
+const CreateModel = props => {
   return (
     <main className="container">
       <div class='content'>
