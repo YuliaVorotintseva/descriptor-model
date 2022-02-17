@@ -41,9 +41,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
+    'corsheaders',
 
     'descriptor_model',
-    'users'
+    'core'
 ]
 
 MIDDLEWARE = [
@@ -54,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'mainapp.urls'
@@ -133,3 +135,7 @@ try:
     from .local_settings import *
 except ImportError:
     pass
+
+CORS_ORIGIN_WHITELIST = [
+     'http://localhost:3000'
+]
