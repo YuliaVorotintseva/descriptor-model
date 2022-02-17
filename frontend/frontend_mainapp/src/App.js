@@ -60,8 +60,7 @@ class App extends React.Component {
         valid: false,
         touched: false,
         validation: {
-          required: true,
-          email: true
+          required: true
         }
       },
       lastname: {
@@ -72,8 +71,7 @@ class App extends React.Component {
         valid: false,
         touched: false,
         validation: {
-          required: true,
-          email: true
+          required: true
         }
       },
       ...this.loginProps.formControls
