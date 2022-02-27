@@ -3,31 +3,31 @@ import styleClasses from './LoadFile.module.css'
 const LoadFile = props => {
   return (
     <div className={styleClasses.Load}>
-      <div class='content'>
+      <div className='content'>
         <h3>Download files with data</h3>
-        <form class='box field is-grouped is-grouped-right'>
-          <div class="file control is-primary has-name is-boxed">
-            <label class="file-label">
-              <input class="file-input" type="file" name="resume" />
-              <span class="file-cta">
-                <span class="file-icon">
+        <form className='box field is-grouped is-grouped-right'>
+          <div className="file control is-primary has-name is-boxed">
+            <label className="file-label">
+              <input className="file-input" type="file" name="resume" />
+              <span className="file-cta">
+                <span className="file-icon">
                   <img src="download.png" />
                 </span>
-                <span class="file-label">
+                <span className="file-label">
                   Choose a file…
                 </span>
               </span>
             </label>
           </div>
 
-          <div class="file control has-name is-boxed">
-            <label class="file-label">
-              <input class="file-input" type="file" name="resume" />
-              <span class="file-cta">
-                <span class="file-icon">
+          <div className="file control has-name is-boxed">
+            <label className="file-label">
+              <input className="file-input" type="file" name="resume" />
+              <span className="file-cta">
+                <span className="file-icon">
                   <img src="get_pdf.png" />
                 </span>
-                <span class="file-label">
+                <span className="file-label">
                   Select from DB
                 </span>
               </span>
@@ -35,18 +35,18 @@ const LoadFile = props => {
           </div>
         </form>
 
-        <div class="field is-grouped">
-          <p class="control">
-            <a class="button is-light">
-              <span class="file-icon">
+        <div className="field is-grouped">
+          <p className="control">
+            <a className="button is-light">
+              <span className="file-icon">
                 <img src="delete_file.png" />
               </span>
               Delete files
             </a>
           </p>
-          <p class="control">
-            <a href='/create' class="button is-primary">
-              <span class="file-icon">
+          <p className="control">
+            <a href='/create' className="button is-primary">
+              <span className="file-icon">
                 <img src="next.png" />
               </span>
               Next
